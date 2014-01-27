@@ -22,7 +22,7 @@
 //----------------------------------------------------------------------
 
 void
-SimpleThread(int which)
+SimpleThread(int T, int S)
 {
     int num;
     
@@ -39,13 +39,77 @@ SimpleThread(int which)
 //----------------------------------------------------------------------
 
 void
-ThreadTest()
+ThreadTest(int number)
 {
     DEBUG('t', "Entering ThreadTest");
+    if(number == 1){
+	Task1();
+    }
 
-    Thread *t = new Thread("forked thread");
+    else if(number == 2){
+	int T, S;
+	printf("How many threads?\n");
+	printf("How many shouts? (Up to 5)\n");
+    	Thread *t = new Thread("forked thread");
+    	t->Fork(SimpleThread, 1);
+    	SimpleThread(0);
+    }
 
-    t->Fork(SimpleThread, 1);
-    SimpleThread(0);
+
 }
 
+void Task1()
+{
+	int c_type = 2;
+	int i = 0;
+	int n = 0;
+        char c_in[26];
+
+        printf("Waiting on user input:\n");
+        scanf("%s",c_in);
+	printf("%s \n",c_in);
+
+	if(c_in[0] == '-'){
+		n = 1;
+		i = 1;		
+	}  
+
+	while(i < 26){
+		if(c_in[i] == '\0'){
+			printf("End of string.\n");
+			break;
+		}
+		
+		if(!isdigit(c_in[i]) || c_in[i] != '.'){
+			c_type = 0;
+			break;
+		}
+		if(c_in[i] = '.'){
+			if(c_type == 1){
+				c_type = 0;
+				break
+			}
+			c_type = 1;
+		}
+		i++;	
+	}
+	
+	if(c_type = 0){
+		printf("Input is character string.\n");
+	}
+	else if(c_type = 1){
+		printf("Input is a ");
+		if(n == 1){
+			printf("negative ");		
+			}
+		printf("decimal.\n");
+	}
+	else if(c_type = 2){
+		printf("Input is a ");
+		if(n == 1){
+			printf("negative ");
+			}
+		printf("integer.\n");
+	}
+ 	
+}

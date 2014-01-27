@@ -108,6 +108,13 @@ Initialize(int argc, char **argv)
 	    randomYield = TRUE;
 	    argCount = 2;
 	}
+
+        if (!strcmp(*argv, "-A")) {        	// Thread testing
+	    ASSERT(argc > 1);			// With -A #
+            ThreadTest(atoi(*(argv + 1)));
+            argCount = 2;
+        } 
+
 #ifdef USER_PROGRAM
 	if (!strcmp(*argv, "-s"))
 	    debugUserProg = TRUE;
