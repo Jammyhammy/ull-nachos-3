@@ -11,6 +11,7 @@
 // This defines *all* of the global data structures used by Nachos.
 // These are all initialized and de-allocated by this file.
 
+int aFlag;						// global flag for command line argument -A
 Thread *currentThread;			// the thread we are running now
 Thread *threadToBeDestroyed;  		// the thread that just finished
 Scheduler *scheduler;			// the ready list
@@ -107,14 +108,15 @@ Initialize(int argc, char **argv)
 						// number generator
 	    randomYield = TRUE;
 	    argCount = 2;
+	} else if(!strcmp(*argv, "-A")) {
+	//Begin code changes by Zachari LaCombe
+	    //ASSERT(argc > 1);
+		if(argc > 1) {
+			aFlag = atoi(*(argv + 1));
+	    	argCount = 2;
+		} 
 	}
-
-        if (!strcmp(*argv, "-A")) {        	// Thread testing
-	    ASSERT(argc > 1);			// With -A #
-            ThreadTest(atoi(*(argv + 1)));
-            argCount = 2;
-        } 
-
+	//End code changes by Zachari LaCombe
 #ifdef USER_PROGRAM
 	if (!strcmp(*argv, "-s"))
 	    debugUserProg = TRUE;
